@@ -1,0 +1,11 @@
+Task: 2nd_update
+Time(seconds): 1954
+Size: 
+Description: Added_in_longer_descriptions
+             Fixed_bug_that_printed_description_incorrectly
+
+
+Task: first_update
+Time(seconds): 613
+Size: XS
+Description: Added_in_a_size_function
