@@ -1,3 +1,21 @@
+commit 19e0aa4d23cefd6ecd7e00c6f4f4410006e4da6d
+Author: Joseph Nehl <jo3n3hl@gmail.com>
+Date:   Sat Feb 17 17:28:42 2018 -0800
+
+    another fix to description
+
+commit 1df21031f7573a430384ed7112ccc61c36f47b25
+Author: Joseph Nehl <jo3n3hl@gmail.com>
+Date:   Sat Feb 17 16:24:04 2018 -0800
+
+    time readablility; fixed a description error
+
+commit 9e36690012431d05051f54aea9453514ebdb1fd4
+Author: Joseph Nehl <jo3n3hl@gmail.com>
+Date:   Tue Feb 13 20:44:52 2018 -0800
+
+    added in README.md
+
 commit 4ff767fcc8388a47956427e0d22699be5260e385
 Author: Joseph Nehl <jo3n3hl@gmail.com>
 Date:   Tue Feb 13 20:43:05 2018 -0800
