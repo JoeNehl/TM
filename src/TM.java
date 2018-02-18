@@ -142,12 +142,15 @@ class Task implements Serializable {
 	}
 	
 	void describe(String des, String size) {//writes the description and size if the user enters
-		if (this.description == null) {
-			this.description=des;
-			this.taskSize=size;
-		} else if (this.description != null) {
-			this.description= this.description + "\n" + "             " + des;
-			this.taskSize=size;
+		if (des == "") {
+		} else {
+			if (this.description == null) {
+				this.description=des;
+				this.taskSize=size;
+			} else if (this.description != null) {
+				this.description= this.description + "\n" + "             " + des;
+				this.taskSize=size;
+			}
 		}
 	}
 	
