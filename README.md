@@ -1,3 +1,8 @@
+# TM Update2
+Added in a function before the data is displayed that makes the times easier to read.
+Instead of just showing seconds, it now properly displays the time in hrs:min:sec.
+This is just a small update to help improve user readablitly of the summary.
+
 # TM Update
 This week I added in the functionality to classify a task size and write in a longer description.
 This weeks assingment was much easier bucause it was bulding off code that i feel is pretty opptimized.

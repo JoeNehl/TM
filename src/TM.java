@@ -145,14 +145,26 @@ class Task implements Serializable {
 		if (this.description == null) {
 			this.description=des;
 			this.taskSize=size;
-		} else if (this.description != "") {
+		} else if (this.description != null) {
 			this.description= this.description + "\n" + "             " + des;
 			this.taskSize=size;
 		}
 	}
 	
 	void summary() {//prints out the data stored
-		System.out.println("Task: " + taskName + "\nTime(seconds): " + totalTimeSpent + "\nSize: " + taskSize + "\nDescription: " + description + "\n\n");
+		String tmp = timeOut(this.totalTimeSpent);
+		String tmp2 = "";
+		if (this.description != null)
+			tmp2 = this.description;
+		System.out.println("Task: " + taskName + "\nTime: " + tmp + "\nSize: " + taskSize + "\nDescription: " + tmp2 + "\n\n");
+	}
+	
+	String timeOut(long totalTimeSpent) {
+		long tmp = totalTimeSpent;
+		long hr =tmp/3600;
+		long min =(tmp%3600)/60;
+		long sec =tmp%60;
+		return (String.format("%02d:%02d:%02d",hr, min, sec));
 	}
 	
 	void taskSize(String des) {//overwrites the size that the user enters for a task
