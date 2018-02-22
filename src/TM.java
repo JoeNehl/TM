@@ -10,15 +10,15 @@ public class TM { //wrong name my bad, TM
 	}
 	
 	void appMain(String[] args) { //args are passed here to be used
-		int count = args.length; //this checks to make sure that no more that 3 args are input and if less than three fixes the out of bounds error
+		int count = args.length; //this checks to make sure that no more that 4 args are input and if less than three fixes the out of bounds error
 		if (count >4) {
 			count = 4;
 		}
-		String[] cmdln = {"", "", "", ""};
-		for (int i=0;i<count;i++) {// puts args into an array of strings
+		String[] cmdln = {"", "", "", ""};// creates an array of empty strings
+		for (int i=0;i<count;i++) {// puts args taken from command line into an array of strings
 			cmdln[i]=args[i];
 		}
-		HashMap<String, Task> taskMap = null; // the beginning of how I store my data
+		HashMap<String, Task> taskMap = null;
 	      try
 	      {
 	         FileInputStream fis = new FileInputStream("taskMap.ser"); // opens a .ser file for data to be written into
@@ -32,10 +32,10 @@ public class TM { //wrong name my bad, TM
 	    	  c.printStackTrace();
 	    	  return;
 	      }
-		String cmd = cmdln[0];
-		String data = cmdln[1];
-		String des = cmdln[2];
-		String size = cmdln[3];
+		String cmd = cmdln[0].toLowerCase();
+		String data = cmdln[1].toLowerCase();
+		String des = cmdln[2].toLowerCase();
+		String size = cmdln[3].toLowerCase();
 		switch (cmd) { //switch statement for the command supplied by the user (in arg 0)
 		case "start":
 			if(taskMap.containsKey(data)){
@@ -48,7 +48,7 @@ public class TM { //wrong name my bad, TM
 			if(taskMap.containsKey(data)){
 				taskMap.get(data).stop();
 			} else {
-				System.out.println("That task doesn't exist.");
+				System.out.println("That task doesn't exist; did you want to create it?");
 				}
 			break;
 		case "describe":
@@ -58,7 +58,7 @@ public class TM { //wrong name my bad, TM
 				taskMap.put(data,new Task(data, des, size));
 				}
 			break;
-		case "summary": // this 
+		case "summary":
 			if(taskMap.containsKey(data)){
 				taskMap.get(data).summary();
 			} else if(data == ""){
@@ -74,6 +74,27 @@ public class TM { //wrong name my bad, TM
 				taskMap.get(data).taskSize(des);
 			} else {
 				System.out.println("That task doesn't exist; did you want to create it?");
+			}
+			break;
+		case "delete":
+			if (taskMap.containsKey(data)) {
+				taskMap.remove(data);
+			}else if (data == "") {
+				taskMap.clear();
+			}else {
+				System.out.println("That task doesn't exist; you cannot delete it");
+			}
+			break;
+		case "rename":
+			if (taskMap.containsKey(des)) {
+				System.out.println("The task name you wish to change to already exists; enter in another name");
+			} else {
+				if (taskMap.containsKey(data)) {
+					taskMap.put(des, taskMap.remove(data));
+					taskMap.get(des).rename(des);
+				} else {
+					System.out.println("That task doesn't exist; did you want to create it?");
+				}
 			}
 			break;
 		default:
@@ -101,7 +122,7 @@ class Task implements Serializable {
 	long startTime;
 	long endTime;
 	
-	public Task(String taskName){// there are two different option, either start with a task and description or start with a task and start time
+	public Task(String taskName){// there are two different options, either start with a task and description or start with a task and start time
 		this.taskName = taskName;//this is for time
 		this.totalTimeSpent = 0;
 		this.startTime = System.currentTimeMillis();
@@ -124,7 +145,6 @@ class Task implements Serializable {
 		} else {
 			System.out.println("Task has already been started.");
 		}
-		
 	}
 	
 	void stop() { //stops the task
@@ -141,25 +161,20 @@ class Task implements Serializable {
 		}
 	}
 	
-	void describe(String des, String size) {//writes the description and size if the user enters
-		if (des == "") {
-		} else {
-			if (this.description == null) {
-				this.description=des;
-				this.taskSize=size;
-			} else if (this.description != null) {
-				this.description= this.description + "\n" + "             " + des;
-				this.taskSize=size;
-			}
+	void describe(String des, String size) {
+		if (this.description == null && des!= "") {
+			this.description = des;
+		} else if (this.description == null && des == "") {
+			this.taskSize=size;
+		} else if (des != "") {
+			this.description= this.description + "\n" + "             " + des;
+			this.taskSize=size;
 		}
 	}
 	
-	void summary() {//prints out the data stored
+	void summary() {
 		String tmp = timeOut(this.totalTimeSpent);
-		String tmp2 = "";
-		if (this.description != null)
-			tmp2 = this.description;
-		System.out.println("Task: " + taskName + "\nTime: " + tmp + "\nSize: " + taskSize + "\nDescription: " + tmp2 + "\n\n");
+		System.out.println("Task: " + taskName + "\nTime: " + tmp + "\nSize: " + taskSize + "\nDescription: " + ((description!=null)?(description):("")) + "\n\n");
 	}
 	
 	String timeOut(long totalTimeSpent) {
@@ -170,12 +185,16 @@ class Task implements Serializable {
 		return (String.format("%02d:%02d:%02d",hr, min, sec));
 	}
 	
-	void taskSize(String des) {//overwrites the size that the user enters for a task
+	void taskSize(String des) {
 		this.taskSize = des;
 	}
 	
+	void rename(String Name) {
+		this.taskName = Name;
+	}
+	
 	@Override
-    public String toString() {// this is what saves it to the .ser file
+    public String toString() {
         return "Task [taskName=" + taskName + ", description=" + description + ", totalTimeSpent=" + Long.toString(totalTimeSpent) + ", startTime=" + Long.toString(startTime) + ", endTime=" + Long.toString(endTime) + "taskSize=" + taskSize + "]";
     }
 }

@@ -1,3 +1,9 @@
+# TM Bug Update
+There is a bug with the way desacription is printed. If the task is started before the description is put in, it will display the 
+description upon output one space below the line. I have figured out why this bug is happeneing (the way i initilize the description and
+have the description update) but i cannot think of a way to fix it without having extra lines of code that arent in the summary (which 
+i want to avoid doing becuase this makes the code more obscure).
+
 # TM Update2
 Added in a function before the data is displayed that makes the times easier to read.
 Instead of just showing seconds, it now properly displays the time in hrs:min:sec.
