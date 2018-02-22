@@ -1,3 +1,15 @@
+commit 3cf7a4c25b78e449ac35fa8b7bd0930f93c9a335
+Author: Joseph Nehl <jo3n3hl@gmail.com>
+Date:   Wed Feb 21 18:30:00 2018 -0800
+
+    Addition of delete, rename and bug fix of description
+
+commit 4f851fb3c2cbde7da02c4c46a7c15665dd737984
+Author: Joseph Nehl <jo3n3hl@gmail.com>
+Date:   Sun Feb 18 13:58:09 2018 -0800
+
+    update to git.log
+
 commit 19e0aa4d23cefd6ecd7e00c6f4f4410006e4da6d
 Author: Joseph Nehl <jo3n3hl@gmail.com>
 Date:   Sat Feb 17 17:28:42 2018 -0800
