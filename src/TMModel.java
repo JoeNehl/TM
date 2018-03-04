@@ -95,10 +95,12 @@ class TMModel implements Serializable {
 		return tmp;
 	}
 	String taskSize(String name) {
+		String size = taskSize;
 		return size;
 	}
 	
 	String taskDescription(String name) {
+		String des = description;
 		return des;
 	}
 	
@@ -110,8 +112,28 @@ class TMModel implements Serializable {
 		return (String.format("%02d:%02d:%02d",hr, min, sec));
 	}
 	
+	String minTimeForSize(String size) {
+		String minTime = "";
+		return minTime;
+	}
+	
+	String maxTimeForSize(String size) {
+		String maxTime ="";
+		return maxTime;
+	}
+	
+	String avgTimeForSize(String size) {
+		String avgTime ="";
+		return avgTime;
+	}
+	
+	String elapsedTimeForAllTasks() {
+		String total = "";
+		return total;
+	}
+	
 	@Override
     public String toString() {
-        return "Task [taskName=" + taskName + ", description=" + description + ", totalTimeSpent=" + Long.toString(totalTimeSpent) + ", startTime=" + Long.toString(startTime) + ", endTime=" + Long.toString(endTime) + "taskSize=" + taskSize + "]";
+        return "Task [taskName=" + taskName + ", description=" + description + ", totalTimeSpent=" + Long.toString(totalTimeSpent) + ", startTime=" + Long.toString(startTime) + ", endTime=" + Long.toString(endTime) + ", taskSize=" + taskSize + "]";
     }
 }
