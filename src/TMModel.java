@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-class TMModel implements Serializable {
+class TMModel implements Serializable, ITMModel {
 	
 	String description;
 	String taskName;
@@ -27,7 +27,7 @@ class TMModel implements Serializable {
 		this.taskSize = size;
 	}
 	
-	boolean startTask() {
+	public boolean startTask(String name) {
 		if (this.startTime <= 0) {
 			this.startTime = System.currentTimeMillis();
 		} else {
@@ -36,7 +36,7 @@ class TMModel implements Serializable {
 		return true;
 	}
 	
-	boolean stopTask() {
+	public boolean stopTask(String name) {
 		if (this.startTime <=0) {
 			System.out.println("Task was not started.");
 		} else {
@@ -51,7 +51,7 @@ class TMModel implements Serializable {
 		return true;
 	}
 	
-	boolean describeTask(String des, String size) {
+	public boolean describeTask(String des, String size) {
 		if (this.description == null && des!= "") {
 			this.description = des;
 		} else if (this.description == null && des == "") {
@@ -64,7 +64,7 @@ class TMModel implements Serializable {
 		return true;
 	}
 	
-	boolean sizeTask(String des) {
+	public boolean sizeTask(String name, String des) {
 		if (checkSize(des)==true) {
 			this.taskSize = des;
 		}
@@ -81,25 +81,25 @@ class TMModel implements Serializable {
 		return check;
 	}
 	
-	boolean deleteTask(){
+	public boolean deleteTask(String name){
 		return true;
 	}
 	
-	boolean renameTask(String Name) {
+	public boolean renameTask(String Name, String newName) {
 		this.taskName = Name;
 		return true;
 	}
 	
-	String taskElapsedTime(String name) {
+	public String taskElapsedTime(String name) {
 		String tmp = timeOut(this.totalTimeSpent);
 		return tmp;
 	}
-	String taskSize(String name) {
+	public String taskSize(String name) {
 		String size = taskSize;
 		return size;
 	}
 	
-	String taskDescription(String name) {
+	public String taskDescription(String name) {
 		String des = description;
 		return des;
 	}
@@ -112,25 +112,40 @@ class TMModel implements Serializable {
 		return (String.format("%02d:%02d:%02d",hr, min, sec));
 	}
 	
-	String minTimeForSize(String size) {
+	public String minTimeForSize(String size) {
 		String minTime = "";
 		return minTime;
 	}
 	
-	String maxTimeForSize(String size) {
+	public String maxTimeForSize(String size) {
 		String maxTime ="";
 		return maxTime;
 	}
 	
-	String avgTimeForSize(String size) {
+	public String avgTimeForSize(String size) {
 		String avgTime ="";
 		return avgTime;
 	}
 	
-	String elapsedTimeForAllTasks() {
+	public String elapsedTimeForAllTasks() {
 		String total = "";
 		return total;
 	}
+	
+    public Set<String> taskNamesForSize(String size){
+   	 	Set<String> tNameSize = new TreeSet<String>();
+   	 	return tNameSize;
+    }
+    
+    public Set<String> taskNames(){
+    	 Set<String> tName = new TreeSet<String>();
+    	return tName;
+    }
+    
+    public Set<String> taskSizes(){
+   	 Set<String> tSize = new TreeSet<String>();
+   	return tSize;
+    }
 	
 	@Override
     public String toString() {

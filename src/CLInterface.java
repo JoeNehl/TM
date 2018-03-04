@@ -38,14 +38,14 @@ public class CLInterface {
 		switch (cmd) { //switch statement for the command supplied by the user (in arg 0)
 		case "start":
 			if(taskMap.containsKey(data)){
-				taskMap.get(data).startTask();
+				taskMap.get(data).startTask(data);
 			} else {
 				taskMap.put(data,new TMModel(data));
 			}
 			break;
 		case "stop":
 			if(taskMap.containsKey(data)){
-				taskMap.get(data).stopTask();
+				taskMap.get(data).stopTask(data);
 			} else {
 				System.out.println("That task doesn't exist; did you want to create it?");
 			}
@@ -63,7 +63,7 @@ public class CLInterface {
 			break;
 		case "size": 
 			if(taskMap.containsKey(data)){
-				taskMap.get(data).sizeTask(des);
+				taskMap.get(data).sizeTask(data, des);
 			} else {
 				System.out.println("That task doesn't exist; did you want to create it?");
 			}
@@ -83,7 +83,7 @@ public class CLInterface {
 			} else {
 				if (taskMap.containsKey(data)) {
 					taskMap.put(des, taskMap.remove(data));
-					taskMap.get(des).renameTask(des);
+					taskMap.get(des).renameTask(data, des);
 				} else {
 					System.out.println("That task doesn't exist; did you want to create it?");
 				}
