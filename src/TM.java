@@ -2,7 +2,7 @@
 import java.io.*; // two files import the java utility and io libraries
 import java.util.*;
 
-public class TM { //wrong name my bad, TM
+public class TM {
 
 	public static void main(String[] args) { // wrote this main like discussed in class, pass args to a different method
 		TM tm = new TM();
@@ -42,21 +42,25 @@ public class TM { //wrong name my bad, TM
 				taskMap.get(data).start();
 			} else {
 				taskMap.put(data,new Task(data));
-				}
+			}
 			break;
 		case "stop":
 			if(taskMap.containsKey(data)){
 				taskMap.get(data).stop();
 			} else {
 				System.out.println("That task doesn't exist; did you want to create it?");
-				}
+			}
 			break;
 		case "describe":
 			if(taskMap.containsKey(data)){
-				taskMap.get(data).describe(des, size);
+					taskMap.get(data).describe(des, size);
 			} else {
-				taskMap.put(data,new Task(data, des, size));
+				if (size.equals("xs") || size.equals("s") || size.equals("m") || size.equals("l") ||size.equals("xl")) {
+					taskMap.put(data,new Task(data, des, size));
+				} else {
+					System.out.println("Unexpected value in size, please enter in xs, s, m, l or xl");
 				}
+			}
 			break;
 		case "summary":
 			if(taskMap.containsKey(data)){
@@ -67,7 +71,7 @@ public class TM { //wrong name my bad, TM
 				}
 			} else {
 				System.out.println("That task doesn't exist; did you want to create it?");
-				}
+			}
 			break;
 		case "size": 
 			if(taskMap.containsKey(data)){
@@ -165,10 +169,11 @@ class Task implements Serializable {
 		if (this.description == null && des!= "") {
 			this.description = des;
 		} else if (this.description == null && des == "") {
-			this.taskSize=size;
 		} else if (des != "") {
 			this.description= this.description + "\n" + "             " + des;
-			this.taskSize=size;
+		}
+		if (checkSize(size)==true) {
+			this.taskSize = size;
 		}
 	}
 	
@@ -186,11 +191,23 @@ class Task implements Serializable {
 	}
 	
 	void taskSize(String des) {
-		this.taskSize = des;
+		if (checkSize(des)==true) {
+			this.taskSize = des;
+		}
 	}
 	
 	void rename(String Name) {
 		this.taskName = Name;
+	}
+	
+	boolean checkSize(String size) {
+		boolean check = false;
+		if (size.equals("xs") || size.equals("s") || size.equals("m") || size.equals("l") ||size.equals("xl")) {
+			check = true;
+		} else {
+			System.out.println("Unexpected value in size, please enter in xs, s, m, l or xl");
+		}
+		return check;
 	}
 	
 	@Override

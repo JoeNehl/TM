@@ -1,3 +1,25 @@
+Task: 5th update
+Time: 00:07:28
+Size: XS
+Description: Added in rename
+
+
+Task: 4th update
+Time: 01:10:53
+Size: S
+Description: Added in delete
+
+
+Task: 3rd update
+Time: 02:23:12
+Size: M
+Description: Bug fixs, ease of use fixs
+             Fixed descriptions, can now take spaces, both description and task name
+             fixed bug that printed description incorrectly prt2
+             change how time is displayed to user, now in hr:min:sec format
+             user now can enter capital letters in commandline and it will accept it ex.(Start, start, StArT).
+
+
 Task: 2nd_update
 Time(seconds): 1954
 Size: 
