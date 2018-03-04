@@ -94,13 +94,13 @@ public class CLInterface {
 				String tmp = taskMap.get(data).taskElapsedTime(data);
 				String siz = taskMap.get(data).taskSize(data);
 				String Des = taskMap.get(data).taskDescription(data);
-				System.out.println("Task: " + data + "\nTime: " + tmp + "\nSize: " + siz + "\nDescription: " + ((Des!=null)?(Des):("")) + "\n\n");
+				System.out.println("Time: " + tmp + "\nSize: " + siz + "\nDescription: " + ((Des!=null)?(Des):("")) + "\n\n");
 			} else if (data == "") {
 				for(TMModel task: taskMap.values()){
 				String tmp = task.taskElapsedTime(data);
 				String siz = task.taskSize(data);
 				String Des = task.taskDescription(data);
-				System.out.println("Task: " + task + "\nTime: " + tmp + "\nSize: " + siz + "\nDescription: " + ((Des!=null)?(Des):("")) + "\n\n");
+				System.out.println("Time: " + tmp + "\nSize: " + siz + "\nDescription: " + ((Des!=null)?(Des):("")) + "\n\n");
 				}
 			} else {
 				System.out.println("That task doesn't exist; did you want to create it?");

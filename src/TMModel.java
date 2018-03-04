@@ -100,6 +100,7 @@ class TMModel implements Serializable, ITMModel {
 	}
 	
 	public String taskDescription(String name) {
+		System.out.println("Task: " + taskName);
 		String des = description;
 		return des;
 	}
