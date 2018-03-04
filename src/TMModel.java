@@ -10,15 +10,15 @@ class TMModel implements Serializable {
 	long startTime;
 	long endTime;
 	
-	public TMModel(String taskName){// there are two different options, either start with a task and description or start with a task and start time
-		this.taskName = taskName;//this is for time
+	public TMModel(String taskName){
+		this.taskName = taskName;
 		this.totalTimeSpent = 0;
 		this.startTime = System.currentTimeMillis();
 		this.endTime = -1;
 		this.taskSize = "";
 		}
 
-	public TMModel(String taskName, String descript, String size){//this is for starting with description
+	public TMModel(String taskName, String descript, String size){
 		this.taskName = taskName;
 		this.totalTimeSpent = 0;
 		this.startTime = 0;
@@ -27,18 +27,19 @@ class TMModel implements Serializable {
 		this.taskSize = size;
 	}
 	
-	void startTask() {//starts time
-		if (this.startTime <= 0) {//checks to see if time has already started
+	boolean startTask() {
+		if (this.startTime <= 0) {
 			this.startTime = System.currentTimeMillis();
 		} else {
 			System.out.println("Task has already been started.");
 		}
+		return true;
 	}
 	
-	void stopTask() { //stops the task
-		if (this.startTime <=0) { //if task isnt started, falls here
+	boolean stopTask() {
+		if (this.startTime <=0) {
 			System.out.println("Task was not started.");
-		} else { //if task is started goes here
+		} else {
 		long partialTime = 0;
 		this.endTime=System.currentTimeMillis();
 		partialTime = this.endTime - this.startTime;
@@ -47,9 +48,10 @@ class TMModel implements Serializable {
 		this.startTime = 0;
 		this.endTime = -1;
 		}
+		return true;
 	}
 	
-	void describeTask(String des, String size) {
+	boolean describeTask(String des, String size) {
 		if (this.description == null && des!= "") {
 			this.description = des;
 		} else if (this.description == null && des == "") {
@@ -59,29 +61,14 @@ class TMModel implements Serializable {
 		if (checkSize(size)==true) {
 			this.taskSize = size;
 		}
+		return true;
 	}
 	
-	void summary() {
-		String tmp = timeOut(this.totalTimeSpent);
-		System.out.println("Task: " + taskName + "\nTime: " + tmp + "\nSize: " + taskSize + "\nDescription: " + ((description!=null)?(description):("")) + "\n\n");
-	}
-	
-	String timeOut(long totalTimeSpent) {
-		long tmp = totalTimeSpent;
-		long hr =tmp/3600;
-		long min =(tmp%3600)/60;
-		long sec =tmp%60;
-		return (String.format("%02d:%02d:%02d",hr, min, sec));
-	}
-	
-	void sizeTask(String des) {
+	boolean sizeTask(String des) {
 		if (checkSize(des)==true) {
 			this.taskSize = des;
 		}
-	}
-	
-	void renameTask(String Name) {
-		this.taskName = Name;
+		return true;
 	}
 	
 	boolean checkSize(String size) {
@@ -92,6 +79,35 @@ class TMModel implements Serializable {
 			System.out.println("Unexpected value in size, please enter in xs, s, m, l or xl");
 		}
 		return check;
+	}
+	
+	boolean deleteTask(){
+		return true;
+	}
+	
+	boolean renameTask(String Name) {
+		this.taskName = Name;
+		return true;
+	}
+	
+	String taskElapsedTime(String name) {
+		String tmp = timeOut(this.totalTimeSpent);
+		return tmp;
+	}
+	String taskSize(String name) {
+		return size;
+	}
+	
+	String taskDescription(String name) {
+		return des;
+	}
+	
+	String timeOut(long totalTimeSpent) {
+		long tmp = totalTimeSpent;
+		long hr =tmp/3600;
+		long min =(tmp%3600)/60;
+		long sec =tmp%60;
+		return (String.format("%02d:%02d:%02d",hr, min, sec));
 	}
 	
 	@Override
