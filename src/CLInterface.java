@@ -105,6 +105,24 @@ public class CLInterface {
 			} else {
 				System.out.println("That task doesn't exist; did you want to create it?");
 			}
+			for (TMModel task: taskMap.values()){
+				task.minTimeForSize(size);
+			}
+			if (sizeCalc.counter[0]>1) {
+				System.out.println("Smallest task for s");
+				System.out.println("TaskName: " + sizeCalc.ss);
+				System.out.println("TaskLength: " + sizeCalc.s + "\n");
+			}
+			if (sizeCalc.counter[1]>1) {
+				System.out.println("Smallest task for m");
+				System.out.println("TaskName: " + sizeCalc.ms);
+				System.out.println("TaskLength: " + sizeCalc.m + "\n");
+			}
+			if (sizeCalc.counter[2]>1) {
+				System.out.println("Smallest task for l");
+				System.out.println("TaskName: " + sizeCalc.ls);
+				System.out.println("TaskLength: " + sizeCalc.l + "\n");
+			}
 			break;
 		default:
 			System.out.println("Make sure you are using the program properly.");
@@ -121,3 +139,4 @@ public class CLInterface {
 		}
 	}
 }
+

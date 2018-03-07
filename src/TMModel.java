@@ -1,6 +1,17 @@
 import java.io.*;
 import java.util.*;
 
+class sizeCalc{
+	public static long s=-1;
+	public static long m=-1;
+	public static long l=-1;
+	public static long t=0;
+	public static String ss="";
+	public static String ms ="";
+	public static String ls="";
+	public static int [] counter = {0,0,0};
+}
+
 class TMModel implements Serializable, ITMModel {
 	
 	String description;
@@ -73,10 +84,10 @@ class TMModel implements Serializable, ITMModel {
 	
 	boolean checkSize(String size) {
 		boolean check = false;
-		if (size.equals("xs") || size.equals("s") || size.equals("m") || size.equals("l") ||size.equals("xl")||size.equals("")) {
+		if (size.equals("s") || size.equals("m") || size.equals("l") ||size.equals("")) {
 			check = true;
 		} else {
-			System.out.println("Unexpected value in size, please enter in xs, s, m, l or xl");
+			System.out.println("Unexpected value in size, please enter in s, m or l");
 		}
 		return check;
 	}
@@ -114,12 +125,31 @@ class TMModel implements Serializable, ITMModel {
 	}
 	
 	public String minTimeForSize(String size) {
-		String minTime = "";
-		return minTime;
+		String ready = "";
+		if (this.taskSize.equals("s")) {
+			if (sizeCalc.s>this.totalTimeSpent || sizeCalc.s==-1) {
+				sizeCalc.s=this.totalTimeSpent;
+				sizeCalc.ss=this.taskName;
+			}
+			sizeCalc.counter[0]++;
+		} else if (this.taskSize.equals("m")) {
+			if (sizeCalc.m>this.totalTimeSpent|| sizeCalc.m==-1) {
+				sizeCalc.m=this.totalTimeSpent;
+				sizeCalc.ms=this.taskName;
+			}
+			sizeCalc.counter[1]++;
+		} else if (this.taskSize.equals("l")) {
+			if (sizeCalc.l>this.totalTimeSpent|| sizeCalc.l==-1) {
+				sizeCalc.l=this.totalTimeSpent;
+				sizeCalc.ls=this.taskName;
+			}
+			sizeCalc.counter[2]++;
+		}
+		return ready;
 	}
 	
 	public String maxTimeForSize(String size) {
-		String maxTime ="";
+		String maxTime="";
 		return maxTime;
 	}
 	
