@@ -1,10 +1,10 @@
 import java.io.*;
 import java.util.*;
 
-public class CLInterface {
+public class TM {
 
 	public static void main(String[] args) {
-		CLInterface cl = new CLInterface();
+		TM cl = new TM();
 		cl.appMain(args);
 	}
 
@@ -110,18 +110,57 @@ public class CLInterface {
 			}
 			if (sizeCalc.counter[0]>1) {
 				System.out.println("Smallest task for s");
-				System.out.println("TaskName: " + sizeCalc.ss);
-				System.out.println("TaskLength: " + sizeCalc.s + "\n");
+				System.out.println("	TaskName: " + sizeCalc.ss);
+				System.out.println("	TaskLength: " + sizeCalc.s + "\n");
 			}
 			if (sizeCalc.counter[1]>1) {
 				System.out.println("Smallest task for m");
-				System.out.println("TaskName: " + sizeCalc.ms);
-				System.out.println("TaskLength: " + sizeCalc.m + "\n");
+				System.out.println("	TaskName: " + sizeCalc.ms);
+				System.out.println("	TaskLength: " + sizeCalc.m + "\n");
 			}
 			if (sizeCalc.counter[2]>1) {
 				System.out.println("Smallest task for l");
-				System.out.println("TaskName: " + sizeCalc.ls);
-				System.out.println("TaskLength: " + sizeCalc.l + "\n");
+				System.out.println("	TaskName: " + sizeCalc.ls);
+				System.out.println("	TaskLength: " + sizeCalc.l + "\n");
+			}
+			sizeCalc.counter[0]=0;
+			sizeCalc.counter[1]=0;
+			sizeCalc.counter[2]=0;
+			for (TMModel task: taskMap.values()){
+				task.maxTimeForSize(size);
+			}
+			if (sizeCalc.counter[0]>1) {
+				System.out.println("Largest task for s");
+				System.out.println("	TaskName: " + sizeCalc.ss);
+				System.out.println("	TaskLength: " + sizeCalc.s + "\n");
+			}
+			if (sizeCalc.counter[1]>1) {
+				System.out.println("Largest task for m");
+				System.out.println("	TaskName: " + sizeCalc.ms);
+				System.out.println("	TaskLength: " + sizeCalc.m + "\n");
+			}
+			if (sizeCalc.counter[2]>1) {
+				System.out.println("Largest task for l");
+				System.out.println("	TaskName: " + sizeCalc.ls);
+				System.out.println("	TaskLength: " + sizeCalc.l + "\n");
+			}
+			sizeCalc.counter[0]=0;
+			sizeCalc.counter[1]=0;
+			sizeCalc.counter[2]=0;
+			sizeCalc.s=0;
+			sizeCalc.m=0;
+			sizeCalc.l=0;
+			for (TMModel task: taskMap.values()){
+				task.avgTimeForSize(size);
+			}
+			if (sizeCalc.counter[0]>1) {
+			System.out.println("Avg for s: " + (sizeCalc.s)/sizeCalc.counter[0]);
+			}
+			if (sizeCalc.counter[1]>1) {
+			System.out.println("Avg for m: " + (sizeCalc.m)/sizeCalc.counter[1]);
+			}
+			if (sizeCalc.counter[2]>1) {
+			System.out.println("Avg for l: " + (sizeCalc.l)/sizeCalc.counter[2]);
 			}
 			break;
 		default:
@@ -139,4 +178,3 @@ public class CLInterface {
 		}
 	}
 }
-

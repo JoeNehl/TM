@@ -5,11 +5,11 @@ class sizeCalc{
 	public static long s=-1;
 	public static long m=-1;
 	public static long l=-1;
-	public static long t=0;
 	public static String ss="";
 	public static String ms ="";
 	public static String ls="";
 	public static int [] counter = {0,0,0};
+	public static String ready = "yes";
 }
 
 class TMModel implements Serializable, ITMModel {
@@ -125,7 +125,6 @@ class TMModel implements Serializable, ITMModel {
 	}
 	
 	public String minTimeForSize(String size) {
-		String ready = "";
 		if (this.taskSize.equals("s")) {
 			if (sizeCalc.s>this.totalTimeSpent || sizeCalc.s==-1) {
 				sizeCalc.s=this.totalTimeSpent;
@@ -145,17 +144,46 @@ class TMModel implements Serializable, ITMModel {
 			}
 			sizeCalc.counter[2]++;
 		}
-		return ready;
+		return sizeCalc.ready;
 	}
 	
 	public String maxTimeForSize(String size) {
-		String maxTime="";
-		return maxTime;
+		if (this.taskSize.equals("s")) {
+			if (sizeCalc.s<this.totalTimeSpent || sizeCalc.s==-1) {
+				sizeCalc.s=this.totalTimeSpent;
+				sizeCalc.ss=this.taskName;
+			}
+			sizeCalc.counter[0]++;
+		} else if (this.taskSize.equals("m")) {
+			if (sizeCalc.m<this.totalTimeSpent|| sizeCalc.m==-1) {
+				sizeCalc.m=this.totalTimeSpent;
+				sizeCalc.ms=this.taskName;
+			}
+			sizeCalc.counter[1]++;
+		} else if (this.taskSize.equals("l")) {
+			if (sizeCalc.l<this.totalTimeSpent|| sizeCalc.l==-1) {
+				sizeCalc.l=this.totalTimeSpent;
+				sizeCalc.ls=this.taskName;
+			}
+			sizeCalc.counter[2]++;
+		}
+		return sizeCalc.ready;
 	}
 	
 	public String avgTimeForSize(String size) {
-		String avgTime ="";
-		return avgTime;
+		if (this.taskSize.equals("s")) {
+			sizeCalc.s=sizeCalc.s+this.totalTimeSpent;
+			sizeCalc.counter[0]++;
+		}
+		if (this.taskSize.equals("m")) {
+			sizeCalc.m=sizeCalc.m+this.totalTimeSpent;
+			sizeCalc.counter[1]++;
+		}
+		if (this.taskSize.equals("l")) {
+			sizeCalc.l=sizeCalc.l+this.totalTimeSpent;
+			sizeCalc.counter[2]++;
+		}
+		return sizeCalc.ready;
 	}
 	
 	public String elapsedTimeForAllTasks() {
